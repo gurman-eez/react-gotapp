@@ -6,7 +6,7 @@ import './errorMessage.css';
 const ErrorMessage = () => {
 	return (
 		<>
-			<img src={img}></img>
+			<img src={img} alt='error'></img>
 			<span>Something goes wrong...</span>
 		</>
 	)
