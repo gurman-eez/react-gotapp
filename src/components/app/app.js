@@ -6,7 +6,7 @@ import ErrorMessage from '../errorMessage';
 import CharacterPage from '../characterPage';
 import GotService from '../../services/gotService';
 import ItemList from '../itemList';
-import CharDetails from '../charDetails';
+import ItemDetails from '../itemDetails';
 
 import './app.css';
 
@@ -58,7 +58,8 @@ export default class App extends Component {
 								onClick={this.onToggle}>Toggle random character</button>
 						</Col>
 					</Row>
-					<CharacterPage />
+					<CharacterPage 
+						getData={this.gotService.getCharacter}/>
 					<Row>
 						<Col md='6'>
 							<ItemList
@@ -67,8 +68,8 @@ export default class App extends Component {
 								renderItem={({name}) => name} />
 						</Col>
 						<Col md='6'>
-							<CharDetails
-								charId={this.selectedChar} />
+							<ItemDetails
+								itemId={this.selectedChar} />
 						</Col>
 					</Row>
 					<Row>
@@ -79,8 +80,8 @@ export default class App extends Component {
 								renderItem={({ name }) => name} />
 						</Col>
 						<Col md='6'>
-							<CharDetails
-								charId={this.selectedChar} />
+							<ItemDetails
+								itemId={this.selectedChar} />
 						</Col>
 					</Row>
 				</Container>
