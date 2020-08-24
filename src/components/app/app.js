@@ -35,6 +35,8 @@ export default class App extends Component {
 		})
 	}
 
+	
+
 	render() {
 
 		const {toggle, error} = this.state;
@@ -59,7 +61,8 @@ export default class App extends Component {
 						</Col>
 					</Row>
 					<CharacterPage 
-						getData={this.gotService.getCharacter}/>
+						getData={this.gotService.getCharacter}
+						onCharSelected={this.onCharSelected}/>
 					<Row>
 						<Col md='6'>
 							<ItemList
