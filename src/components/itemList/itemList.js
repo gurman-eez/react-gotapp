@@ -10,15 +10,17 @@ export default class ItemList extends Component {
 	gotService = new GotService();
 
 	state = {
-		charList: null,
+		itemList: null,
 		error: false
 	}
 
 	componentDidMount() {
-		this.gotService.getAllCharacters()
-			.then(charList => {
+		const {getData} = this.props;
+		
+		getData()
+			.then(itemList => {
 				this.setState({
-					charList,
+					itemList,
 					error: false
 				});
 			})
@@ -28,14 +30,14 @@ export default class ItemList extends Component {
 
 	componentDidCatch() {
 		this.setState({
-			charList: null,
+			itemList: null,
 			error: true
 		})
 	}
 
 	onError(status) {
 		this.setState({
-			charList: null,
+			itemList: null,
 			error: true
 		})
 	}
@@ -56,18 +58,18 @@ export default class ItemList extends Component {
 
 	render() {
 
-		const { charList, error } = this.state;
+		const { itemList, error } = this.state;
 
 		if (error) {
 			return <ErrorMessage />
 		}
 
 
-		if (!charList) {
+		if (!itemList) {
 			return <Spinner />
 		}
 
-		const items = this.renderItem(charList);
+		const items = this.renderItem(itemList);
 
 		return (
 			<ul className="item-list list-group">
