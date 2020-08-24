@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import ItemList from '../itemList';
-import CharDetails from '../charDetails';
+import CharDetails, {Field} from '../charDetails';
 import ErrorMessage from '../errorMessage';
 import GotService from '../../services/gotService';
 import RowBlock from '../rowBlock';
@@ -28,6 +28,8 @@ export default class CharacterPage extends Component {
 	}
 
 	render() {
+		const { error, selectedChar } = this.state;
+
 		const itemList = (
 			<ItemList
 				onCharSelected={this.onCharSelected}
@@ -36,17 +38,20 @@ export default class CharacterPage extends Component {
 		)
 		const charDetails = (
 			<CharDetails
-				charId={selectedChar} />
+				charId={selectedChar} >
+				<Field field='gender' label='Gender'/>
+				<Field field='born' label='Born'/>
+				<Field field='died' label='Died'/>
+				<Field field='culture' label='Culture'/>
+			</CharDetails>
 		)
-
-		const {error, selectedChar} = this.state;
 
 		if (error) {
 			return <ErrorMessage />
 		}
 
 		return (
-			<RowBlock left={itemList} rigth={charDetails}/>
+			<RowBlock left={itemList} right={charDetails}/>
 		)
 	}
 }
