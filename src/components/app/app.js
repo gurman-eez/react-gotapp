@@ -3,12 +3,12 @@ import { Col, Row, Container } from 'reactstrap';
 import Header from '../header';
 import RandomChar from '../randomChar';
 import ErrorMessage from '../errorMessage';
-import CharacterPage from '../characterPage';
+import CharacterPage from '../pages/characterPage';
 import GotService from '../../services/gotService';
-import ItemList from '../itemList';
-import ItemDetails from '../itemDetails';
-
+import BookPage from '../pages/bookPage';
+import HousePage from '../pages/housePage';
 import './app.css';
+
 
 
 
@@ -61,32 +61,11 @@ export default class App extends Component {
 						</Col>
 					</Row>
 					<CharacterPage 
-						getData={this.gotService.getCharacter}
-						onCharSelected={this.onCharSelected}/>
-					<Row>
-						<Col md='6'>
-							<ItemList
-								onCharSelected={this.onCharSelected}
-								getData={this.gotService.getAllBooks}
-								renderItem={({name}) => name} />
-						</Col>
-						<Col md='6'>
-							<ItemDetails
-								itemId={this.selectedChar} />
-						</Col>
-					</Row>
-					<Row>
-						<Col md='6'>
-							<ItemList
-								onCharSelected={this.onCharSelected}
-								getData={this.gotService.getAllHouses}
-								renderItem={({ name }) => name} />
-						</Col>
-						<Col md='6'>
-							<ItemDetails
-								itemId={this.selectedChar} />
-						</Col>
-					</Row>
+						getData={this.gotService.getCharacter}/>
+					<BookPage 
+						getData={this.gotService.getBook} />
+					<HousePage
+						getData={this.gotService.getHouse} />
 				</Container>
 			</>
 		);
