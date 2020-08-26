@@ -3,6 +3,7 @@ import GotService from '../../services/gotService';
 import './itemList.css';
 import Spinner from '../spinner';
 import ErrorMessage from '../errorMessage';
+import PropTypes from 'prop-types';
 
 
 export default class ItemList extends Component {
@@ -12,6 +13,12 @@ export default class ItemList extends Component {
 	state = {
 		itemList: null,
 		error: false
+	}
+	static defaultProps = {
+		onItemSelected: () => { }
+	}
+	static propTypes = {
+		onItemSelected: PropTypes.func
 	}
 
 	componentDidMount() {
@@ -79,3 +86,4 @@ export default class ItemList extends Component {
 		);
 	}
 }
+

@@ -4,28 +4,32 @@ import './randomChar.css';
 import GotService from '../../services/gotService';
 import Spinner from '../spinner';
 import ErrorMessage from '../errorMessage';
+import PropTypes from 'prop-types';
 
 export default class RandomChar extends Component {
-	constructor() {
-		super();
-		this.UpdateChar();
-	}
-
-	componentDidMount() {
-		this.UpdateChar();
-		this.timerId = setInterval(this.UpdateChar, 1500);
-	}
-
-	componentWillUnmount() {
-		clearInterval(this.timerId)
-	}
-
+	
 	gotService = new GotService();
 
 	state = {
 		char: {},
 		loading: true,
 		error: false
+	}
+	static defaultProps = {
+		interval: 10000
+	}
+	static propTypes = {
+		interval: PropTypes.number
+	}
+	
+
+	componentDidMount() {
+		this.UpdateChar();
+		this.timerId = setInterval(this.UpdateChar, this.props.interval);
+	}
+
+	componentWillUnmount() {
+		clearInterval(this.timerId)
 	}
 
 	onCharLoaded = char => {
@@ -67,6 +71,7 @@ export default class RandomChar extends Component {
 		);
 	}
 }
+
 
 const View = ({ char }) => {
 	const { name, gender, born, died, culture } = char;
