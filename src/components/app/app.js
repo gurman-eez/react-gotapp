@@ -3,10 +3,9 @@ import { Col, Row, Container } from 'reactstrap';
 import Header from '../header';
 import RandomChar from '../randomChar';
 import ErrorMessage from '../errorMessage';
-import CharacterPage from '../pages/characterPage';
+import { BookPage, HousePage, CharacterPage} from '../pages';
 import GotService from '../../services/gotService';
-import BookPage from '../pages/bookPage';
-import HousePage from '../pages/housePage';
+
 import './app.css';
 
 
