@@ -59,12 +59,9 @@ export default class App extends Component {
 								onClick={this.onToggle}>Toggle random character</button>
 						</Col>
 					</Row>
-					<CharacterPage 
-						getData={this.gotService.getCharacter}/>
-					<BookPage 
-						getData={this.gotService.getBook} />
-					<HousePage
-						getData={this.gotService.getHouse} />
+					<CharacterPage />
+					<BookPage />
+					<HousePage />
 				</Container>
 			</>
 		);

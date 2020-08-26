@@ -39,7 +39,7 @@ export default class HousePage extends Component {
 		const houseDetails = (
 			<ItemDetails
 				itemId={selectedHouse}
-				getData={this.props.getData} >
+				getData={this.gotService.getHouse} >
 				<Field field='region' label='Region' />
 				<Field field='words' label='Words' />
 				<Field field='titles' label='Titles' />
