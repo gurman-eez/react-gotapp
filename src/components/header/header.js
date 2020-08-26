@@ -31,7 +31,7 @@ const Header = () => {
     return (
         <HeaderBlock>
             <HeaderTitle>
-                <Link to='/'>
+                <Link to='/main'>
                 Game of Thrones DB
                 </Link>
             </HeaderTitle>

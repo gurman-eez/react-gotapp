@@ -3,7 +3,7 @@ import { Col, Row, Container } from 'reactstrap';
 import Header from '../header';
 import RandomChar from '../randomChar';
 import ErrorMessage from '../errorMessage';
-import { BookPage, BookItem, HousePage, CharacterPage} from '../pages';
+import { MainPage, BookPage, BookItem, HousePage, CharacterPage} from '../pages';
 import GotService from '../../services/gotService';
 import {BrowserRouter as Router, Route} from 'react-router-dom';
 
@@ -62,6 +62,7 @@ export default class App extends Component {
 									onClick={this.onToggle}>Toggle random character</button>
 							</Col>
 						</Row>
+						<Route path='/main' component={MainPage} />
 						<Route path='/characters' component={CharacterPage} />
 						<Route path='/houses' component={HousePage} />
 						<Route path='/books' exact component={BookPage} />

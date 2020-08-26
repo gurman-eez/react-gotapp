@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Col, Row} from 'reactstrap';
 import ItemList from '../itemList';
 import ErrorMessage from '../errorMessage';
 import GotService from '../../services/gotService';
@@ -29,12 +30,16 @@ class BookPage extends Component {
 		}
 
 		return (
-			<ItemList
-				onItemSelected={(itemId) => {
-					this.props.history.push(itemId)
-				}}
-				getData={this.gotService.getAllBooks}
-				renderItem={({ name }) => name} />
+			<Row>
+				<Col lg={{ size: 10, offset: 0 }}></Col>
+					<ItemList
+						onItemSelected={(itemId) => {
+							this.props.history.push(itemId)
+						}}
+						getData={this.gotService.getAllBooks}
+						renderItem={({ name }) => name} />
+				<Col/>
+			</Row>
 		)
 	}
 }
