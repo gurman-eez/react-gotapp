@@ -1,7 +1,7 @@
 import React from 'react';
 import './spinner.css'
 
-const Spinner = () => {
+const Spinner = () => {		// компонент спиннера
 	return (
 		<div className="loadingio-spinner-spin-aakg0kyyf3">
 			<div className="ldio-1s8lr2xqyli">

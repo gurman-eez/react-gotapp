@@ -1,89 +1,46 @@
-import React, { Component } from 'react';
-import GotService from '../../services/gotService';
+import React, { useState, useEffect } from 'react';
 import './itemList.css';
 import Spinner from '../spinner';
-import ErrorMessage from '../errorMessage';
-import PropTypes from 'prop-types';
 
 
-export default class ItemList extends Component {
 
-	gotService = new GotService();
+function ItemList({ getData, onItemSelected, renderItem }) {
+	const [itemList, updateList] = useState([]);						// хук на переменные
 
-	state = {
-		itemList: null,
-		error: false
-	}
-	static defaultProps = {
-		onItemSelected: () => { }
-	}
-	static propTypes = {
-		onItemSelected: PropTypes.func
-	}
-
-	componentDidMount() {
-		const {getData} = this.props;
-		
+	useEffect(() => {						// хук на действие(обновление списка)
 		getData()
-			.then(itemList => {
-				this.setState({
-					itemList,
-					error: false
-				});
+			.then(data => {
+				updateList(data)
 			})
-			.catch(() => { this.onError() });
-		// this.foo.bar = 0;
-	}
+	}, [])
 
-	componentDidCatch() {
-		this.setState({
-			itemList: null,
-			error: true
-		})
-	}
-
-	onError(status) {
-		this.setState({
-			itemList: null,
-			error: true
-		})
-	}
-
-	renderItems(arr) {
+	function renderItems(arr) {			//рендерим элементы списка
 		return arr.map(item => {
 			const { id } = item;
-			const label = this.props.renderItem(item);
+			const label = renderItem(item);
 			return (
 				<li
-					key={id}
+					key={id}			// уникальный ключ
 					className="list-group-item"
-					onClick={() => this.props.onItemSelected(id)}>
+					onClick={() => onItemSelected(id)}>
 					{label}
 				</li>
 			)
 		})
 	}
 
-	render() {
-
-		const { itemList, error } = this.state;
-
-		if (error) {
-			return <ErrorMessage />
-		}
-
-
-		if (!itemList) {
-			return <Spinner />
-		}
-
-		const items = this.renderItems(itemList);
-
-		return (
-			<ul className="item-list list-group">
-				{items}
-			</ul>
-		);
+	if (!itemList) {
+		return <Spinner />			// компонент спиннера
 	}
+
+	const items = renderItems(itemList);
+
+	return (
+		<ul className="item-list list-group">
+			{items}
+		</ul>
+	);
+
 }
 
+export default ItemList;

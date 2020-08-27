@@ -27,11 +27,11 @@ const HeaderLinks = styled.ul`
     }
 `;
 
-const Header = () => {
+const Header = () => {					//функциональный компонент шапки сайта
     return (
         <HeaderBlock>
             <HeaderTitle>
-                <Link to='/main'>
+                <Link to='/'>
                 Game of Thrones DB
                 </Link>
             </HeaderTitle>

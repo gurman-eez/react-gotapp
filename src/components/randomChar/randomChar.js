@@ -6,40 +6,40 @@ import Spinner from '../spinner';
 import ErrorMessage from '../errorMessage';
 import PropTypes from 'prop-types';
 
-export default class RandomChar extends Component {
+export default class RandomChar extends Component {	// компонент рандомного персонажа
 	
-	gotService = new GotService();
+	gotService = new GotService();		// из api
 
 	state = {
-		char: {},
+		char: {},		// по умолчанию пустой объект
 		loading: true,
 		error: false
 	}
-	static defaultProps = {
+	static defaultProps = {		// пропсы по умолчанию
 		interval: 10000
 	}
 	static propTypes = {
-		interval: PropTypes.number
+		interval: PropTypes.number		// обязательно число
 	}
 	
 
-	componentDidMount() {
+	componentDidMount() {			// появление компонента
 		this.UpdateChar();
 		this.timerId = setInterval(this.UpdateChar, this.props.interval);
 	}
 
-	componentWillUnmount() {
+	componentWillUnmount() {			// исчезновение компонента
 		clearInterval(this.timerId)
 	}
 
-	onCharLoaded = char => {
+	onCharLoaded = char => {		// когда данные персонажа загружены
 		this.setState({
 			char,
 			loading: false
 		})
 	}
 
-	onError = err => {
+	onError = err => {		// отработка ошибки
 		this.setState({
 			loading: false,
 			error: true
@@ -47,9 +47,9 @@ export default class RandomChar extends Component {
 	}
 
 	UpdateChar = () => {
-		const id = Math.floor(Math.random() * 140 + 25) // 25-140
-		// const id = 10000;
-		this.gotService.getCharacter(id)
+		const id = Math.floor(Math.random() * 140 + 25) // 25-140 персонаж
+		// const id = 10000;									это на проверку ошибки
+		this.gotService.getCharacter(id)					// достаем персонажа по id
 			.then(this.onCharLoaded)
 			.catch(this.onError)
 	}
@@ -73,7 +73,7 @@ export default class RandomChar extends Component {
 }
 
 
-const View = ({ char }) => {
+const View = ({ char }) => {				// компонент с данными персонажа
 	const { name, gender, born, died, culture } = char;
 
 	return (

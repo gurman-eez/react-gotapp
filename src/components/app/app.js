@@ -4,7 +4,7 @@ import Header from '../header';
 import RandomChar from '../randomChar';
 import ErrorMessage from '../errorMessage';
 import { MainPage, BookPage, BookItem, HousePage, CharacterPage} from '../pages';
-import GotService from '../../services/gotService';
+import GotService from '../../services/gotService';	// api
 import {BrowserRouter as Router, Route} from 'react-router-dom';
 
 import './app.css';
@@ -14,40 +14,38 @@ import './app.css';
 
 
 
-export default class App extends Component {
-	gotService = new GotService();
+export default class App extends Component {		// создаем и экспортим новый классовый компонент
+	gotService = new GotService();	// создаем переменную из api
 
 
-	state = {
-		toggle : false,
-		error: false
+	state = {					// задаем стейты
+		toggle : false,		// переключение кнопки
+		error: false			// ошибка
 	}
 
-	componentDidCatch() {
+	componentDidCatch() {	// хук на случай ошибки
 		this.setState({
-			error: true
+			error: true			// задаем новое значение
 		})
 	}
 
 
-	onToggle = () => {
+	onToggle = () => {		// функция по переключению значения
 		this.setState({
-			toggle: !this.state.toggle
+			toggle: !this.state.toggle		// меняем значение на противоположное
 		})
 	}
 
-	
+	render() {					// рендерим страницу
 
-	render() {
+		const {toggle, error} = this.state;		// достаем данные из стейта
 
-		const {toggle, error} = this.state;
-
-		const randomChar = toggle ? null : <RandomChar />;
+		const randomChar = toggle ? null : <RandomChar />;		// переменная на компонент RandomChar
 
 		if (error) {
-			return <ErrorMessage />
+			return <ErrorMessage />		// возврат ошибки 
 		}
-		return (
+		return (							// возврат страницы
 			<Router>
 				<div className='app'>
 					<Container>
@@ -62,15 +60,14 @@ export default class App extends Component {
 									onClick={this.onToggle}>Toggle random character</button>
 							</Col>
 						</Row>
-						<Route path='/main' component={MainPage} />
+						<Route path='/' exact component={MainPage} /> 
 						<Route path='/characters' component={CharacterPage} />
 						<Route path='/houses' component={HousePage} />
 						<Route path='/books' exact component={BookPage} />
 						<Route path='/books/:id' render={({match}) => { 
 							const {id} = match.params;
 							return <BookItem bookId={id}/>} 
-					}/>
-						
+						}/>
 					</Container>
 				</div>
 			</Router>

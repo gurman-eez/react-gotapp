@@ -9,7 +9,7 @@ color: white;
 const MainSubtitle = styled(MainTitle)`
 font-size: 24px;
 `
-const MainPage = () => {
+const MainPage = () => {		// главная страница
 	return (
 		<>
 			<MainTitle>Welcome to the "Game of Thrones Database" site!</MainTitle>

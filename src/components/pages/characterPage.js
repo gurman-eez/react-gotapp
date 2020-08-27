@@ -7,12 +7,12 @@ import RowBlock from '../rowBlock';
 
 
 export default class CharacterPage extends Component {
-	gotService = new GotService();
+	gotService = new GotService();  // из api
 
 
 	state = {
-		selectedChar: 130,
-		error: false
+		selectedChar: 130,	// выбранный персонаж по умолчанию
+		error: false			// ошибка
 	}
 
 	componentDidCatch() {
@@ -23,7 +23,7 @@ export default class CharacterPage extends Component {
 
 	onCharSelected = id => {
 		this.setState({
-			selectedChar: id
+			selectedChar: id		//задаем id выбранному персонажу
 		})
 	}
 
@@ -33,14 +33,14 @@ export default class CharacterPage extends Component {
 		const itemList = (
 			<ItemList
 				onItemSelected={this.onCharSelected}
-				getData={this.gotService.getAllCharacters}
-				renderItem={({ name, gender }) => `${name} (${gender})`} />
+				getData={this.gotService.getAllCharacters}	//персонажи из api
+				renderItem={({ name, gender }) => `${name} (${gender})`} /> // показываем имя и пол персонажа
 		)
 		const charDetails = (
 			<ItemDetails
 				itemId={selectedChar}
 				getData={this.gotService.getCharacter} >
-				<Field field='gender' label='Gender'/>
+				<Field field='gender' label='Gender'/>			
 				<Field field='born' label='Born'/>
 				<Field field='died' label='Died'/>
 				<Field field='culture' label='Culture'/>
@@ -48,11 +48,11 @@ export default class CharacterPage extends Component {
 		)
 
 		if (error) {
-			return <ErrorMessage />
+			return <ErrorMessage />		// компонент ошибки
 		}
 
 		return (
-			<RowBlock left={itemList} right={charDetails}/>
+			<RowBlock left={itemList} right={charDetails}/>		// список слева а выбранный из списка - справа
 		)
 	}
 }

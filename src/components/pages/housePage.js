@@ -7,11 +7,11 @@ import RowBlock from '../rowBlock';
 
 
 export default class HousePage extends Component {
-	gotService = new GotService();
+	gotService = new GotService();		// из api
 
 
 	state = {
-		selectedHouse: 5,
+		selectedHouse: 5,		// показанный дом по умолчанию
 		error: false
 	}
 
@@ -23,7 +23,7 @@ export default class HousePage extends Component {
 
 	onHouseSelected = id => {
 		this.setState({
-			selectedHouse: id
+			selectedHouse: id			// выбраный дом по id
 		})
 	}
 
@@ -32,9 +32,9 @@ export default class HousePage extends Component {
 
 		const itemList = (
 			<ItemList
-				// onItemSelected={this.onHouseSelected}
-				getData={this.gotService.getAllHouses}
-				renderItem={({ name }) => name} />
+				onItemSelected={this.onHouseSelected}
+				getData={this.gotService.getAllHouses}		//	все дома из api
+				renderItem={({ name }) => name} />			// задаем имя элемента 
 		)
 		const houseDetails = (
 			<ItemDetails
@@ -49,11 +49,11 @@ export default class HousePage extends Component {
 		)
 
 		if (error) {
-			return <ErrorMessage />
+			return <ErrorMessage />			// ошибка
 		}
 
 		return (
-			<RowBlock left={itemList} right={houseDetails} />
+			<RowBlock left={itemList} right={houseDetails} />		// список слева а выбранный из списка - справа
 		)
 	}
 }

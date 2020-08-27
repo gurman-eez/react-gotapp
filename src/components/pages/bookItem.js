@@ -3,12 +3,8 @@ import { Col, Row} from 'reactstrap';
 import ItemDetails, { Field } from '../itemDetails';
 import GotService from '../../services/gotService';
 
-export default class BookItem extends Component {
-	gotService = new GotService();
-
-	state = {
-		selectedBook: 3
-	}
+export default class BookItem extends Component {		// компонент выбранной книги
+	gotService = new GotService();	// из api
 
 	render() {
 		return (

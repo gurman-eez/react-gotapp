@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
-import GotService from '../../services/gotService';
 
 import './itemDetails.css';
 import ErrorMessage from '../errorMessage';
 import Spinner from '../spinner';
 
-const Field = ({item, field, label}) => {
+const Field = ({item, field, label}) => {			// функциональный компонент элемента из списка
 	return (
 		<li className="list-group-item d-flex justify-content-between">
 			<span className="term">{label}</span>
@@ -18,13 +17,11 @@ export {
 	Field
 }
 
-export default class ItemDetails extends Component {
-
-	gotService = new GotService();
+export default class ItemDetails extends Component {			// классовый компонент списка
 
 	state = {
 		item: null,
-		loading: true,
+		loading: true,		// загрузка
 		error: false
 	}
 
@@ -33,12 +30,12 @@ export default class ItemDetails extends Component {
 	}
 
 	componentDidUpdate(prevProps) {
-		if (this.props.itemId !== prevProps.itemId) {
+		if (this.props.itemId !== prevProps.itemId) {	// проверка на совпадение пропсов
 			this.updateItem();
 		}
 	}
 
-	updateItem() {
+	updateItem() {											//обновление элемента
 		const { itemId, getData } = this.props;
 		if (!itemId) {
 			return;
@@ -48,7 +45,7 @@ export default class ItemDetails extends Component {
 			loading: true
 		})
 
-		getData(itemId)
+		getData(itemId)		// обновляем элемент по id
 			.then(item => {
 				this.setState({
 					item,
@@ -56,10 +53,9 @@ export default class ItemDetails extends Component {
 				})
 			})
 			.catch(() => this.onError())
-		// this.foo.bar = 0;
 	}
 
-	onError() {
+	onError() {				// ошибка
 		this.setState({
 			item: null,
 			error: true
@@ -71,12 +67,12 @@ export default class ItemDetails extends Component {
 		
 
 		if (!item && error) {
-			return <ErrorMessage />
+			return <ErrorMessage />						// возвращаем компонент с ошибкой
 		} else if (!item) {
 			return <span>Please choose...</span>
 		}
 
-		if (loading) {
+		if (loading) {										// возвразаем компонент со спиннером
 			return (
 				<div className="item-details rounded">
 					<Spinner />
@@ -86,7 +82,7 @@ export default class ItemDetails extends Component {
 
 		const { name } = item;
 
-		return (
+		return (																		// меняем детей itemDetails(компонент Field)
 			<div className="item-details rounded">
 				<h4>{name}</h4>
 				{

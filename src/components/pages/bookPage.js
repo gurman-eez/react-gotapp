@@ -6,12 +6,12 @@ import GotService from '../../services/gotService';
 import {withRouter} from 'react-router-dom';
 
 
-class BookPage extends Component {
-	gotService = new GotService();
+class BookPage extends Component {		// компонент со списком книг
+	gotService = new GotService();		// из api
 
 
 	state = {
-		error: false
+		error: false			// ошибка
 	}
 
 	componentDidCatch() {
@@ -44,4 +44,4 @@ class BookPage extends Component {
 	}
 }
 
-export default withRouter(BookPage)
+export default withRouter(BookPage) //получение пропсов из Route
